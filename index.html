@@ -72,6 +72,7 @@
             >
               Maiores Perdas
             </button>
+
             <!-- Campo de busca o histórico de preços -->
             <h4 class="mt-4">Histórico de Preços</h4>
             <input
@@ -87,22 +88,523 @@
               Buscar Histórico
             </button>
 
+            <!--Gerenciar Moedas-->
+            <h4 class="mt-4">Gerenciar Moedas</h4>
+
+            <!--Botão buscar Moeda-->
+            <button
+              class="btn btn-primary mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#selecionar_moedaModal"
+            >
+              Buscar Moeda
+            </button>
+            <div
+              class="modal fade"
+              id="selecionar_moedaModal"
+              tabindex="-1"
+              aria-labelledby="selecionar_moedaModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="selecionar_moedaModalLabel">
+                      Buscar Moeda
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form
+                      id="selecionar_formMoeda"
+                      onsubmit="selecionar_buscarMoeda(event)"
+                    >
+                      <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                          <label for="selecionar_idMoeda" class="form-label"
+                            >ID da Moeda</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="selecionar_idMoeda"
+                            placeholder="Digite o ID da moeda"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label for="selecionar_nomeMoeda" class="form-label"
+                            >Nome da Moeda</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="selecionar_nomeMoeda"
+                            placeholder="Digite o nome da moeda"
+                          />
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        Buscar
+                      </button>
+                    </form>
+                    <hr />
+                    <div id="selecionar_moedaResultados"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Botão inserir nova moeda-->
+            <button
+              class="btn btn-primary mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#modalInserirMoeda"
+            >
+              Inserir Moeda
+            </button>
+            <div
+              class="modal fade"
+              id="modalInserirMoeda"
+              tabindex="-1"
+              aria-labelledby="modalInserirMoedaLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalInserirMoedaLabel">
+                      Inserir Nova Moeda
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formInserirMoeda">
+                      <div class="mb-3">
+                        <label for="inserir_nome" class="form-label"
+                          >Nome</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inserir_nome"
+                          name="inserir_nome"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="inserir_simbolo" class="form-label"
+                          >Símbolo</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inserir_simbolo"
+                          name="inserir_simbolo"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="inserir_url_imagem" class="form-label"
+                          >URL da Imagem</label
+                        >
+                        <input
+                          type="url"
+                          class="form-control"
+                          id="inserir_url_imagem"
+                          name="inserir_url_imagem"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="inserir_preco_atual" class="form-label"
+                          >Preço Atual</label
+                        >
+                        <input
+                          type="number"
+                          step="0.01"
+                          class="form-control"
+                          id="inserir_preco_atual"
+                          name="inserir_preco_atual"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="inserir_capital_mercado" class="form-label"
+                          >Capital de Mercado</label
+                        >
+                        <input
+                          type="number"
+                          step="0.01"
+                          class="form-control"
+                          id="inserir_capital_mercado"
+                          name="inserir_capital_mercado"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          for="inserir_percentual_mudanca_preco"
+                          class="form-label"
+                          >Percentual de Mudança no Preço</label
+                        >
+                        <input
+                          type="number"
+                          step="0.01"
+                          class="form-control"
+                          id="inserir_percentual_mudanca_preco"
+                          name="inserir_percentual_mudanca_preco"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label
+                          for="inserir_rank_capital_mercado"
+                          class="form-label"
+                          >Rank do Capital de Mercado</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="inserir_rank_capital_mercado"
+                          name="inserir_rank_capital_mercado"
+                          required
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      id="btnSalvarMoeda"
+                    >
+                      Salvar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Botão listar Moeda-->
+            <button
+              class="btn btn-primary mt-2"
+              onclick="moedaListar()"
+              data-bs-toggle="modal"
+              data-bs-target="#listarModal"
+            >
+              Listar Moedas
+            </button>
+            <div
+              class="modal fade"
+              id="listarModal"
+              tabindex="-1"
+              aria-labelledby="listarModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="listarModalLabel">
+                      Lista de Moedas
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Símbolo</th>
+                          <th>Nome</th>
+                          <th>Imagem</th>
+                          <th>Preço Atual</th>
+                          <th>Capital Mercado</th>
+                          <th>Mudança Preço</th>
+                          <th>Rank Capital Mercado</th>
+                        </tr>
+                      </thead>
+                      <tbody id="moedaTabela"></tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Fechar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Botão alterar Moeda-->
+            <button
+              class="btn btn-primary mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#modalAlterarMoeda"
+            >
+              Alterar Moeda
+            </button>
+
+            <div
+              class="modal fade"
+              id="modalAlterarMoeda"
+              tabindex="-1"
+              aria-labelledby="modalAlterarMoedaLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalAlterarMoedaLabel">
+                      Alterar Moeda
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formAlterarMoeda">
+                      <div class="mb-3">
+                        <label for="id_moeda" class="form-label"
+                          >ID da Moeda</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="id_moeda"
+                          name="id_moeda"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="simbolo" class="form-label"
+                          >Símbolo da Moeda</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="simbolo"
+                          name="simbolo"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="nome" class="form-label"
+                          >Nome da Moeda</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nome"
+                          name="nome"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="preco_atual" class="form-label"
+                          >Preço Atual</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="preco_atual"
+                          name="preco_atual"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="capital_mercado" class="form-label"
+                          >Capital de Mercado</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="capital_mercado"
+                          name="capital_mercado"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="percentual_mudanca_preco" class="form-label"
+                          >Percentual Mudança Preço</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="percentual_mudanca_preco"
+                          name="percentual_mudanca_preco"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="rank_capital_mercado" class="form-label"
+                          >Rank</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="rank_capital_mercado"
+                          name="rank_capital_mercado"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="url_imagem" class="form-label"
+                          >URL da Imagem</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="url_imagem"
+                          name="url_imagem"
+                          required
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      onclick="moedaAlterar()"
+                    >
+                      Alterar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Botão excluir Moeda-->
+            <button
+              class="btn btn-danger mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#excluir_modalExcluirMoeda"
+            >
+              Excluir Moeda
+            </button>
+            <div
+              class="modal fade"
+              id="excluir_modalExcluirMoeda"
+              tabindex="-1"
+              aria-labelledby="excluir_modalExcluirMoedaLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="excluir_modalExcluirMoedaLabel">
+                      Excluir Moeda
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="excluir_formExcluirMoeda">
+                      <div class="mb-3">
+                        <label for="excluir_id_moeda" class="form-label"
+                          >ID da Moeda</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="excluir_id_moeda"
+                          name="excluir_id_moeda"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="excluir_nome" class="form-label"
+                          >Nome da Moeda</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="excluir_nome"
+                          name="excluir_nome"
+                          required
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      onclick="moedaExcluir()"
+                    >
+                      Excluir
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Campo do Carrinho-->
             <h4 class="mt-4">Carrinho</h4>
             <ul id="lista-carrinho" class="list-group"></ul>
             <button class="btn btn-success mt-3" onclick="finalizarCompra()">
               Finalizar Compra
             </button>
-            <button class="btn btn-info mt-3" onclick="exibirLogs()">
+            <button class="btn btn-secondary mt-3" onclick="exibirLogs()">
               Ver Logs
             </button>
           </div>
         </div>
+
         <!-- Cards das moedas -->
         <div class="col-md-9">
           <div id="moedas-container" class="row justify-content-center"></div>
         </div>
       </div>
     </div>
+
     <!-- Modal para exibir os logs -->
     <div
       class="modal fade"
@@ -122,6 +624,7 @@
         </div>
       </div>
     </div>
+
     <!-- Modal para exibir o histórico de preços -->
     <div
       class="modal fade"
@@ -155,6 +658,7 @@
       var logs = [];
       var dadosMoedas = [];
       var carrinho = [];
+
       // Função para registrar logs
       async function registrarLog(sistema, acao, detalhes) {
         const entradaLog = {
@@ -166,6 +670,7 @@
         logs.push(entradaLog);
         console.log(logs);
       }
+
       // Função para exibir logs no modal
       function exibirLogs() {
         var containerLogs = document.getElementById("logsContainer");
@@ -189,11 +694,13 @@
           modalLogs.show();
         }
       }
+
       // Função para remover um log pelo índice
       function removerLog(indice) {
         logs.splice(indice, 1);
         exibirLogs();
       }
+
       // Função para buscar as 10 moedas mais famosas
       async function buscarMoedasFamosas() {
         try {
@@ -227,6 +734,7 @@
           console.error("Erro ao buscar moedas famosas:", erro);
         }
       }
+
       // Função para exibir as moedas em cards
       function exibirMoedasEmCards(moedas) {
         var containerMoedas = document.getElementById("moedas-container");
@@ -262,6 +770,7 @@
           containerMoedas.appendChild(card);
         });
       }
+
       // Função para filtrar as moedas com maiores ganhos
       function filtrarMaioresGanhos() {
         registrarLog(
@@ -275,6 +784,7 @@
         );
         exibirMoedasEmCards(maioresGanhos.slice(0, 10));
       }
+
       // Função para filtrar as moedas com maiores perdas
       function filtrarMaioresPerdas() {
         registrarLog(
@@ -288,6 +798,7 @@
         );
         exibirMoedasEmCards(maioresPerdas.slice(0, 10));
       }
+
       // Função para buscar o histórico de preços de uma moeda inserida
       async function buscarHistoricoPrecos() {
         var nomeMoeda = document
@@ -313,6 +824,7 @@
           alert("Moeda não encontrada ou erro ao buscar histórico.");
         }
       }
+
       // Exibir histórico de preços em um modal
       function exibirHistoricoPrecos(historico, nomeMoeda) {
         var listaHistoricoPrecos = document.getElementById(
@@ -328,17 +840,16 @@
           ).toLocaleDateString()} - Preço: $${preco[1].toFixed(2)}`;
           listaHistoricoPrecos.appendChild(listItem);
         });
-
         var modalHistoricoPrecos = new bootstrap.Modal(
           document.getElementById("priceHistoryModal")
         );
         modalHistoricoPrecos.show();
       }
+
       // Função para adicionar moedas ao carrinho
       function adicionarAoCarrinho(moedaId) {
         var moeda = dadosMoedas.find((m) => m.id === moedaId);
         var quantidade = document.getElementById(`quantidade-${moedaId}`).value;
-
         if (quantidade > 0) {
           var itemCarrinho = {
             id: moedaId,
@@ -351,11 +862,11 @@
           exibirCarrinho();
         }
       }
+
       // Função para exibir o carrinho
       function exibirCarrinho() {
         var listaCarrinho = document.getElementById("lista-carrinho");
         listaCarrinho.innerHTML = "";
-
         carrinho.forEach((item) => {
           var listItem = document.createElement("li");
           listItem.classList.add("list-group-item");
@@ -370,11 +881,13 @@
           listaCarrinho.appendChild(listItem);
         });
       }
+
       // Função para remover moedas do carrinho
       function removerDoCarrinho(moedaId) {
         carrinho = carrinho.filter((item) => item.id !== moedaId);
         exibirCarrinho();
       }
+
       // Função para finalizar compra
       function finalizarCompra() {
         if (carrinho.length > 0) {
@@ -385,12 +898,36 @@
           alert("Seu carrinho está vazio!");
         }
       }
+
       // Inicializar com as moedas mais famosas ao carregar a página
       document.addEventListener("DOMContentLoaded", () => {
         buscarMoedasFamosas();
       });
+
+      // Função para registrar as moedas no banco ao carregar a página
+      async function registrarMoedasNoBanco(moedas) {
+        try {
+          const resposta = await fetch("php/registrar_moedas.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(moedas),
+          });
+
+          const resultado = await resposta.text();
+          console.log("Resposta do servidor:", resultado);
+        } catch (erro) {
+          console.error("Erro ao registrar as moedas:", erro);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", async () => {
+        await buscarMoedasFamosas();
+        registrarMoedasNoBanco(dadosMoedas);
+      });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="config.js" defer></script>
     <!--Footer-->
     <footer class="bg-light text-center py-3">
       <p>Gabriel Ferrari de Oliveira - Fundamentos ao Desenvolvimento Web</p>
