@@ -32,39 +32,39 @@ function selecionar_buscarMoeda(event) {
         resultados.innerHTML = `<p class="text-danger">${data.mensagem}</p>`;
       } else {
         let tabela = `
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Símbolo</th>
-                  <th>Preço Atual</th>
-                  <th>Capital de Mercado</th>
-                  <th>Mudança Preço</th>
-                  <th>Rank</th>
-                  <th>Imagem</th>
-                </tr>
-              </thead>
-              <tbody>
-          `;
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Símbolo</th>
+                    <th>Preço Atual</th>
+                    <th>Capital de Mercado</th>
+                    <th>Mudança Preço</th>
+                    <th>Rank</th>
+                    <th>Imagem</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
         data.forEach((moeda) => {
           tabela += `
-              <tr>
-                <td>${moeda.id_moeda}</td>
-                <td>${moeda.nome}</td>
-                <td>${moeda.simbolo}</td>
-                <td>${moeda.preco_atual}</td>
-                <td>${moeda.capital_mercado}</td>
-                <td>${moeda.percentual_mudanca_preco}%</td>
-                <td>${moeda.rank_capital_mercado}</td>
-                <td><img src="${moeda.url_imagem}" alt="${moeda.nome}" style="max-width: 50px;"></td>
-              </tr>
-            `;
+                <tr>
+                  <td>${moeda.id_moeda}</td>
+                  <td>${moeda.nome}</td>
+                  <td>${moeda.simbolo}</td>
+                  <td>${moeda.preco_atual}</td>
+                  <td>${moeda.capital_mercado}</td>
+                  <td>${moeda.percentual_mudanca_preco}%</td>
+                  <td>${moeda.rank_capital_mercado}</td>
+                  <td><img src="${moeda.url_imagem}" alt="${moeda.nome}" style="max-width: 50px;"></td>
+                </tr>
+              `;
         });
         tabela += `
-              </tbody>
-            </table>
-          `;
+                </tbody>
+              </table>
+            `;
         resultados.innerHTML = tabela;
       }
     })
