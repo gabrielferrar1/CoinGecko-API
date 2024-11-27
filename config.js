@@ -270,3 +270,34 @@ async function moedaExcluir() {
     alert("Erro ao excluir a moeda. Tente novamente mais tarde.");
   }
 }
+
+//Função para registrar Logs
+async function registrarLogNoBanco(numeroRegistros) {
+  const dataHoraAtual = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  const logData = {
+    datahora: dataHoraAtual,
+    numeroregistros: numeroRegistros,
+  };
+
+  try {
+    const response = await fetch(".php/registrar_logs.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(logData),
+    });
+
+    const resultado = await response.json();
+    console.log("Resposta do servidor:", resultado);
+
+    if (resultado.status === "sucesso") {
+      console.log("Log armazenado com sucesso:", resultado.mensagem);
+    } else {
+      console.error("Erro ao armazenar log:", resultado.mensagem);
+    }
+  } catch (error) {
+    console.error("Erro ao registrar log no banco:", error);
+  }
+}
