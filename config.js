@@ -272,32 +272,52 @@ async function moedaExcluir() {
 }
 
 //Função para registrar Logs
-async function registrarLogNoBanco(numeroRegistros) {
-  const dataHoraAtual = new Date().toISOString().slice(0, 19).replace("T", " ");
-
-  const logData = {
-    datahora: dataHoraAtual,
-    numeroregistros: numeroRegistros,
-  };
-
-  try {
-    const response = await fetch(".php/registrar_logs.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(logData),
+function registrarLogBanco(dataHora, numeroRegistros) {
+  fetch("php/registrar_logs.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      dataHora: dataHora,
+      numeroRegistros: numeroRegistros,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "sucesso") {
+        alert(data.mensagem);
+      } else {
+        console.error(data.mensagem);
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao registrar o log:", error);
     });
+}
+function moedaListar() {
+  buscarMoedasFamosas();
+  const dataHora = new Date().toISOString();
+  const numeroRegistros = dadosMoedas.length;
 
-    const resultado = await response.json();
-    console.log("Resposta do servidor:", resultado);
+  registrarLogBanco(dataHora, numeroRegistros);
+}
 
-    if (resultado.status === "sucesso") {
-      console.log("Log armazenado com sucesso:", resultado.mensagem);
-    } else {
-      console.error("Erro ao armazenar log:", resultado.mensagem);
-    }
-  } catch (error) {
-    console.error("Erro ao registrar log no banco:", error);
-  }
+// Listar Logs
+function buscarLogsNoBanco() {
+  fetch("php/listar_logs.php")
+    .then((response) => response.json())
+    .then((logsDoBanco) => {
+      logs = logsDoBanco.map((log) => ({
+        data: log.datahora,
+        sistema: "Sistema CoinGecko",
+        acao: "Consulta ao banco",
+        detalhes: `Número de registros: ${log.numeroregistros}`,
+      }));
+      exibirLogs();
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar logs do banco:", error);
+      alert("Erro ao buscar logs. Tente novamente.");
+    });
 }

@@ -1,10 +1,14 @@
 <?php
+header('Content-Type: application/json');
 try {
     require 'banco.php';
 
-    if (isset($_POST['dataHora'], $_POST['numeroRegistros'])) {
-        $datahora = $_POST['dataHora'];
-        $numeroregistros = intval($_POST['numeroRegistros']);
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    if (isset($data['dataHora'], $data['numeroRegistros'])) {
+        $datahora = $data['dataHora'];
+        $numeroregistros = intval($data['numeroRegistros']);
 
         $query = "INSERT INTO log (datahora, numeroregistros) VALUES (:datahora, :numeroregistros)";
         $stmt = $con->prepare($query);
